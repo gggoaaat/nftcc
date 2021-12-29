@@ -212,16 +212,16 @@ export default function NFTWalletBridge(e) {
         contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
 
 
-        // let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
-        //     alert('transaction success')}).catch(function(e){ 
-        //     console.log('error')                                          
-        // })
+        let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
+            alert('transaction success')}).catch(function(e){ 
+            console.log('error')                                          
+        })
 
         
-        let txTransfer = await contract.methods.mint1(Amount).estimateGas()
-        .then(function (estimate) {
-          console.log("Estimated gas to execute mint: ", estimate);
-        });
+        // let txTransfer = await contract.methods.mint1(Amount).estimateGas()
+        // .then(function (estimate) {
+        //   console.log("Estimated gas to execute mint: ", estimate);
+        // });
 
         //let txTransfer = await contract.methods.mint1(Amount).call();
         //let txTransfer2 = txTransfer.estimateGas({from: connectedWalletAddress});
