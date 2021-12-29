@@ -6,7 +6,7 @@ module.exports = {
     //contractAddress : "0x98631c69602083d04f83934576a53e2a133d482f",
     infuraID : "045e9c65387a4200aa8559c347fa19a4",
     defaultGas: 210000,
-    ethValue : 0.75,
+    ethValue : 0.075,
     debug : false
   },
   images: {
