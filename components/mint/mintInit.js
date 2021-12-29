@@ -141,9 +141,9 @@ export default function MintInit() {
 
             {(currentUseState.isConnected && currentUseState.isWaiting == false) &&
                 <div style={dappBody}>
-                    <label>Number to mint (1-200):</label>
+                    <label>Number to mint (1-40):</label>
 
-                    <input type="number" id="mints" name="mints" min="1" max="100" defaultValue="1" onChange={(e) =>
+                    <input type="number" id="mints" name="mints" min="1" max="40" defaultValue="1" onChange={(e) =>
                         updateFormInput({ ...formInput, amount: e.target.value })
                     } />
                 </div>
