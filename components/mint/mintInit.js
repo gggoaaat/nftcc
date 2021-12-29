@@ -91,7 +91,7 @@ export default function MintInit() {
             }
             <div id="userWalletAddress" style={dappBody}>
                 <p>
-                    Mint Cost : <strong>0.075 Eth plus Gas</strong>
+                    Mint Cost : <strong>0.075 ETH plus Gas</strong>
                     <br />
                     Wallet address: <strong>{currentUseState.xmPower.filteredAddress}</strong>
                     <br />
