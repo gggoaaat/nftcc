@@ -4,6 +4,8 @@ import React, { useReducer, useState, useEffect } from 'react';
 import ContractABI from "./nftccABI"
 import { ethers } from "ethers";
 import Button from '@mui/material/Button';
+import bg_gold from '../public/bg_gold.png'
+import bg_green from '../public/bg_green.png'
 
 let provider = null;
 let web3 = null;
@@ -61,8 +63,7 @@ export default function NFTWalletBridge(e) {
             //networkId = await ethersProvider.getNetwork()
             connectedWalletAddress = accounts[0].toLowerCase();
 
-            //contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas });
-            contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress });
+            contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas });
             let totalShares = await contract.methods.totalSupply.call()
 
             let resultTS = await totalShares.call();
@@ -83,7 +84,6 @@ export default function NFTWalletBridge(e) {
 
     async function disconnect() {
         // await provider.close();
-
         provider = null;
 
         const web3Modal = new Web3Modal({
@@ -193,7 +193,7 @@ export default function NFTWalletBridge(e) {
             console.log(Amount);
         }
 
-        const TotalTokens = 0.07 * Amount;
+        const TotalTokens = process.env.defaultGas * Amount;
 
         let currentGasPrice = await web3.eth.getGasPrice()
         
@@ -209,16 +209,21 @@ export default function NFTWalletBridge(e) {
 
         var tokens = web3.utils.toWei(TotalTokens.toString(), 'ether')
         var bntokens = web3.utils.toBN(tokens)
-        //contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
-        contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress});
+        contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
 
 
-        let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
-            alert('transaction success')}).catch(function(e){ 
-            console.log('error')                                          
-        })
+        // let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
+        //     alert('transaction success')}).catch(function(e){ 
+        //     console.log('error')                                          
+        // })
 
-        5//let txTransfer = await contract.methods.mint1(Amount).call();
+        
+        let txTransfer = await contract.methods.mint1(Amount).estimateGas()
+        .then(function (estimate) {
+          console.log("Estimated gas to execute mint: ", estimate);
+        });
+
+        //let txTransfer = await contract.methods.mint1(Amount).call();
         //let txTransfer2 = txTransfer.estimateGas({from: connectedWalletAddress});
         //console.log(txTransfer);
         return {};
