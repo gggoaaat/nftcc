@@ -61,7 +61,8 @@ export default function NFTWalletBridge(e) {
             //networkId = await ethersProvider.getNetwork()
             connectedWalletAddress = accounts[0].toLowerCase();
 
-            contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas });
+            //contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas });
+            contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress });
             let totalShares = await contract.methods.totalSupply.call()
 
             let resultTS = await totalShares.call();
@@ -208,7 +209,8 @@ export default function NFTWalletBridge(e) {
 
         var tokens = web3.utils.toWei(TotalTokens.toString(), 'ether')
         var bntokens = web3.utils.toBN(tokens)
-        contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
+        //contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
+        contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress});
 
 
         let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
