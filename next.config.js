@@ -7,7 +7,7 @@ module.exports = {
     infuraID: "045e9c65387a4200aa8559c347fa19a4",
     defaultGas: 310000,
     ethValue : "0.075",
-    debug: true
+    debug: false
   },
   images: {
     domains: ['static.wixstatic.com', 'thenftcc.io']

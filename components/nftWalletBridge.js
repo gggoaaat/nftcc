@@ -108,7 +108,7 @@ export default function NFTWalletBridge(e) {
         //signer = provider.signer();
 
         if (process.env.debug) {
-            console.log(ethersProvider);
+            console.log(provider);
             // console.log(signer);
         }
 
@@ -194,7 +194,8 @@ export default function NFTWalletBridge(e) {
         }
 
         //const TotalTokens = 0.075 * Amount;
-        const TotalTokens = +process.env.ethValue * Amount;
+        const TotalTokens = Math.round((+process.env.ethValue * Amount) * 10000) / 10000
+        //const TotalTokens = (+process.env.ethValue).toFixed(4) * Amount;
 
         let currentGasPrice = await web3.eth.getGasPrice()
         
@@ -213,10 +214,10 @@ export default function NFTWalletBridge(e) {
         contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
 
 
-        let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
-            alert('transaction success')}).catch(function(e){ 
-            console.log('error')                                          
-        })
+        // let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
+        //     alert('transaction success')}).catch(function(e){ 
+        //     console.log('error')                                          
+        // })
 
         
         // let txTransfer = await contract.methods.mint1(Amount).estimateGas()
