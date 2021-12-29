@@ -193,7 +193,7 @@ export default function NFTWalletBridge(e) {
             console.log(Amount);
         }
 
-        const TotalTokens = process.env.defaultGas * Amount;
+        const TotalTokens = 0.075 * Amount;
 
         let currentGasPrice = await web3.eth.getGasPrice()
         
