@@ -1,11 +1,5 @@
 .container {
   padding: 0 2rem;
-  /* background-image: url("https://static.wixstatic.com/media/0d6414_078b663c796642dfb35cc85eaef41476~mv2.jpg"); */
-  background-repeat: repeat-x;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: 92rem;
-  background-position-y: 10rem;
   height: 100%;
 }
 
@@ -60,6 +54,11 @@
   border-top: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+  
+}
+
+.headerImg {
+  
 }
 
 .header a {

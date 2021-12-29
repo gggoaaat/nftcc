@@ -8,8 +8,6 @@ import Image from 'next/image'
 
 export default function MintInit() {
 
-    let lastUp;
-
     const bridgeParams = {
         tokenAddress: process.env.contractAddress,
         providerOptions: {
@@ -68,47 +66,7 @@ export default function MintInit() {
         padding: "0rem 1rem 0rem 1rem"
     }
 
-    function onChangeSlider(props) {
-        var val = $(this).val();
-        $(this).siblings('.testInput').val(val);
-    }
-
-    function Question(props) {
-        const thisQuestion = 'Should xMooney join forces with former Safemoon CTO Thomas "Papa" Smith?';
-        return thisQuestion;
-    }
-
-    function doCORSRequest(url) {
-        if (process.env.debug == true) {
-            return 'http://localhost.com:8080/' + url
-        }
-
-        return url;
-    }
-
-    function loadup(returnedhash) {
-
-        lastUp.evmHash = returnedhash;
-        if (returnedhash) {
-            fetch(doCORSRequest('https://us-east1-just-shape-317505.cloudfunctions.net/postcontent'), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(lastUp)
-            })
-        }
-    }
-
     async function SendMint(props) {
-
-        lastUp = ({
-            vote: props.vote,
-            amount: currentUseState.xmPower.theBalance,
-            trueAmount: currentUseState.xmPower.trueBalance,
-            address: currentUseState.xmPower.connectedWalletAddress,
-            timestamp: +new Date()
-        });
 
         const returnedhash = await walletBridge1.sendMint(props.mint)
 
@@ -133,17 +91,25 @@ export default function MintInit() {
             }
             <div id="userWalletAddress" style={dappBody}>
                 <p>
+                    Mint Cost : <strong>0.075 Eth plus Gas</strong>
+                    <br />
                     Wallet address: <strong>{currentUseState.xmPower.filteredAddress}</strong>
                     <br />
                     Eth Balance : <strong>{currentUseState.xmPower.theBalance}</strong>
+                    <br />
+                    NFT Contract : <a
+                        href="https://etherscan.io/token/0x349598b7d168d19d50bbd4f59672612b1f4ac75f/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >0x349598b7d168d19d50bbd4f59672612b1f4ac75f</a>
                 </p>
             </div>
 
             {(currentUseState.isConnected && currentUseState.isWaiting == false) &&
                 <div style={dappBody}>
-                    <label>Number to mint (1-200):</label>
+                    <label>Number to mint (1-40):</label>
 
-                    <input type="number" id="mints" name="mints" min="1" max="200" defaultValue="1" onChange={(e) =>
+                    <input type="number" id="mints" name="mints" min="1" max="40" defaultValue="1" onChange={(e) =>
                         updateFormInput({ ...formInput, amount: e.target.value })
                     } />
                 </div>
@@ -157,7 +123,7 @@ export default function MintInit() {
                         </div>}
                 </div>
             }
-            <br/>
+            <br />
             {(currentUseState.isConnected && currentUseState.isWaiting == false) &&
                 <div style={dappBody}>
                     NFTCC&apos;s minted {currentUseState.numMinted} of 2500
