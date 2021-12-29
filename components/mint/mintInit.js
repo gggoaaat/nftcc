@@ -143,7 +143,7 @@ export default function MintInit() {
                 <div style={dappBody}>
                     <label>Number to mint (1-200):</label>
 
-                    <input type="number" id="mints" name="mints" min="1" max="200" defaultValue="1" onChange={(e) =>
+                    <input type="number" id="mints" name="mints" min="1" max="100" defaultValue="1" onChange={(e) =>
                         updateFormInput({ ...formInput, amount: e.target.value })
                     } />
                 </div>
