@@ -1,6 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
-import nftcc from '../public/nftccbg.jpg'
+import nftcc from '../public/nftcclogo.png'
 
 export default function Header() {
     return (

@@ -69,7 +69,7 @@ export default function NFTWalletBridge(e) {
             let resultTS = await totalShares.call();
             console.log(`totalShares: ${resultTS}`)
             setnumMinted(resultTS)
-            
+
             //ethersContract = new ethers.Contract(tokenAddress, etherABI, signer)
             //const balance2 = await ethersProvider.getBalance(accounts[0]);
             const balance2 = await web3.eth.getBalance(accounts[0]);
@@ -169,12 +169,18 @@ export default function NFTWalletBridge(e) {
         const isLoggedIn = checkIfLoggedIN(props);
         if (isLoggedIn) {
             return (
-                <Button variant="outlined" size="Large" onClick={() => disconnect()}>Disconnect Wallet</Button>
+                <Button variant="outlined" size="Large" sx={{
+                    border: '1px solid rgba(46, 125, 50, 0.5)',
+                    color: 'success.main',
+                }} onClick={() => disconnect()}>Disconnect Wallet</Button>
             );
         }
         return (
             <div className="showPortisBtn">
-                <Button variant="outlined" size="Large" onClick={() => showWeb3Modal()}>Connect to Wallet</Button>
+                <Button variant="outlined" size="Large" sx={{
+                    border: '1px solid rgba(46, 125, 50, 0.5)',
+                    color: 'success.main',
+                }} onClick={() => showWeb3Modal()}>Connect to Wallet</Button>
             </div>);
     }
 
@@ -198,28 +204,29 @@ export default function NFTWalletBridge(e) {
         //const TotalTokens = (+process.env.ethValue).toFixed(4) * Amount;
 
         let currentGasPrice = await web3.eth.getGasPrice()
-        
+
         if (process.env.debug) {
             console.log(`currentGasPrice: ${currentGasPrice}`)
-        }      
+        }
 
         let gas_price = 210000;//Web3.fromWei(currentGasPrice, 'gwei') 
 
         if (process.env.debug) {
             console.log(`gas_price: ${gas_price}`)
-        }  
+        }
 
         var tokens = web3.utils.toWei(TotalTokens.toString(), 'ether')
         var bntokens = web3.utils.toBN(tokens)
         contract = new web3.eth.Contract(contractABI, tokenAddress, { from: connectedWalletAddress, gas: process.env.defaultGas * Amount });
 
 
-        let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value : bntokens}).then(function(result){             
-            alert('Transaction success')}).catch(function(e){ 
-            console.log('error')                                          
+        let txTransfer = await contract.methods.mint1(Amount).send({ from: connectedWalletAddress, value: bntokens }).then(function (result) {
+            alert('Transaction success')
+        }).catch(function (e) {
+            console.log('error')
         })
 
-        
+
         // let txTransfer = await contract.methods.mint1(Amount).estimateGas()
         // .then(function (estimate) {
         //   console.log("Estimated gas to execute mint: ", estimate);
@@ -259,7 +266,7 @@ export default function NFTWalletBridge(e) {
                 isConnected, setConnected, isWaiting, setIsWaiting,
                 xmPower: tokenBalance,
                 setxmPower: setTokenBalance,
-                numMinted : numMinted
+                numMinted: numMinted
             }
         },
         sendMint: function (props) {

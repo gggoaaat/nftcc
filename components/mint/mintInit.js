@@ -119,7 +119,10 @@ export default function MintInit() {
                 <div style={dappBody}>
                     {(currentUseState.isConnected && currentUseState.isWaiting == false && currentUseState.xmPower.filteredAddress != "N/A") &&
                         <div style={SliderStyle}>
-                            <Button variant="outlined" size="Large" onClick={() => SendMint({ mint: formInput.amount })}>Mint</Button>
+                            <Button variant="outlined" size="Large" sx={{
+                                border: '1px solid rgba(46, 125, 50, 0.5)',
+                                color: 'success.main',
+                            }} onClick={() => SendMint({ mint: formInput.amount })}>Mint</Button>
                         </div>}
                 </div>
             }
