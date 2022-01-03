@@ -12,8 +12,8 @@ export default function Footer() {
             >
                 {' '}
                 <span className={styles.logo}>
-                    {/* 
-                    <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} /> */}
+                    { 
+                    <Image src="https://thenftcc.io/wp-content/uploads/2022/01/Powered_final4x.png?resize=300%2C67&ssl=1" alt="Vercel Logo" width={156} height={35} /> }
                 </span>
             </a>
         </footer>
